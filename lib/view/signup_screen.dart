@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/auth_controller.dart';
-import '../utils/constants/app_colors.dart';
+import '../constants/app_colors.dart';
 import '../utils/helpers/validators.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
