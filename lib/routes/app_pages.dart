@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import '../view/login_screen.dart';
 import '../view/signup_screen.dart';
-
 import 'app_routes.dart';
 
 class AppPages {

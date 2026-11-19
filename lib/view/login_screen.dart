@@ -33,9 +33,9 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.arrow_back,
-                      color: AppColors.navy,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     Obx(
                       () => IconButton(
@@ -57,25 +57,25 @@ class LoginScreen extends StatelessWidget {
                 const Icon(
                   Icons.directions_bus_rounded,
                   size: 75,
-                  color: AppColors.red,
+                  color: AppColors.brandRed,
                 ),
 
                 const SizedBox(height: 5),
 
                 RichText(
-                  text: const TextSpan(
-                    style: TextStyle(
+                  text: TextSpan(
+                    style: const TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                     children: [
                       TextSpan(
                         text: 'PSB ',
-                        style: TextStyle(color: AppColors.navy),
+                        style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                       ),
                       TextSpan(
                         text: 'Go',
-                        style: TextStyle(color: AppColors.teal),
+                        style: TextStyle(color: Theme.of(context).colorScheme.secondary),
                       ),
                     ],
                   ),
@@ -83,9 +83,9 @@ class LoginScreen extends StatelessWidget {
 
                 const SizedBox(height: 10),
 
-                const Text(
+                Text(
                   'Track • Ride • Explore',
-                  style: TextStyle(color: AppColors.navy),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                 ),
 
                 const SizedBox(height: 65),
@@ -113,7 +113,7 @@ class LoginScreen extends StatelessWidget {
                         auth.isPasswordVisible.value
                             ? Icons.visibility
                             : Icons.visibility_off,
-                        color: AppColors.navy,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -142,10 +142,10 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () {
                       Get.toNamed(AppRoutes.forgotPassword);
                     },
-                    child: const Text(
+                    child: Text(
                       'Forgot Password?',
                       style: TextStyle(
-                        color: AppColors.navy,
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontSize: 12,
                       ),
                     ),
@@ -157,10 +157,10 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                     Text(
                       "Don't have an account? ",
                       style: TextStyle(
-                        color: AppColors.navy,
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontSize: 13,
                       ),
                     ),
@@ -168,10 +168,10 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () {
                         Get.toNamed(AppRoutes.signup);
                       },
-                      child: const Text(
+                      child:  Text(
                         'Sign Up',
                         style: TextStyle(
-                          color: AppColors.teal,
+                          color: Theme.of(context).colorScheme.secondary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

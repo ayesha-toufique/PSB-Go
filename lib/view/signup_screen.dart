@@ -37,10 +37,10 @@ class SignupScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
+                 Text(
                   'Join PSB Go for a smarter journey',
                   style: TextStyle(
-                    color: AppColors.navy,
+                    color: Theme.of(context).colorScheme.onSurface,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -53,6 +53,7 @@ class SignupScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: roleButton(
+                          context:context,
                           title: 'Passenger',
                           selected: auth.selectedRole.value == 'passenger',
                           onTap: () => auth.selectRole('passenger'),
@@ -61,6 +62,7 @@ class SignupScreen extends StatelessWidget {
                       const SizedBox(width: 12),
                       Expanded(
                         child: roleButton(
+                          context:context,
                           title: 'Driver',
                           selected: auth.selectedRole.value == 'driver',
                           onTap: () => auth.selectRole('driver'),
@@ -180,18 +182,18 @@ class SignupScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                     Text(
                       'Already have an account?',
-                      style: TextStyle(color: AppColors.navy),
+                      style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                     ),
                     TextButton(
                       onPressed: () {
                         Get.offNamed(AppRoutes.login);
                       },
-                      child: const Text(
+                      child:  Text(
                         'Login',
                         style: TextStyle(
-                          color: AppColors.teal,
+                          color: Theme.of(context).colorScheme.secondary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -206,31 +208,38 @@ class SignupScreen extends StatelessWidget {
     );
   }
 
-  Widget roleButton({
-    required String title,
-    required bool selected,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 45,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: selected ? AppColors.teal : Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: selected ? AppColors.teal : AppColors.border,
-          ),
-        ),
-        child: Text(
-          title,
-          style: TextStyle(
-            color: selected ? Colors.white : AppColors.navy,
-            fontWeight: FontWeight.bold,
-          ),
+Widget roleButton({
+  required BuildContext context,
+  required String title,
+  required bool selected,
+  required VoidCallback onTap,
+}) {
+  final colors = Theme.of(context).colorScheme;
+
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      height: 45,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: selected ? colors.secondary : colors.surface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: selected
+              ? colors.secondary
+              : Theme.of(context).brightness == Brightness.light
+                  ? AppColors.lightBorder
+                  : AppColors.darkBorder,
         ),
       ),
-    );
-  }
+      child: Text(
+        title,
+        style: TextStyle(
+          color: selected ? Colors.white : colors.onSurface,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  );
+}
 }
