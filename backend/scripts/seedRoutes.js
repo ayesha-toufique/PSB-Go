@@ -86,35 +86,44 @@ const routeData = [
   }
 ];
 
+
 async function seed() {
   try {
-    if (!MONGO_URI) throw new Error('MONGO_URI is missing in backend/.env');
-    await mongoose.connect(MONGO_URI);
-    console.log('Connected to DB for seeding...');
+    if (!MONGO_URI) {
+      throw new Error('MONGO_URI is missing in backend/.env');
+    }
 
-    // Clear existing data (Optional: remove if you want to keep existing)
-    // await Route.deleteMany({});
-    // await Stop.deleteMany({});
+    await mongoose.connect(MONGO_URI);
+    console.log('Connected to MongoDB...');
+
+    // Temporary coordinates for displaying stops in the app.
+    // These are NOT the actual GPS locations of individual stops.
+    const defaultCoordinates = [67.0011, 24.8607];
 
     for (const data of routeData) {
       const stopIds = [];
 
       for (let i = 0; i < data.stops.length; i++) {
         const stopName = data.stops[i];
-        let stop = await Stop.findOne({ name: stopName });
 
-        if (!stop) {
-          // Create stop with approximate Karachi center coordinates + small random offset
-          // (Since we don't have exact GPS for 100+ stops right now)
-          stop = new Stop({
-            name: stopName,
-            location: {
-              type: 'Point',
-              coordinates: [67.0011 + (Math.random() - 0.5) * 0.2, 24.8607 + (Math.random() - 0.5) * 0.2]
+        // Find existing stop or create a new one
+        const stop = await Stop.findOneAndUpdate(
+          { name: stopName },
+          {
+            $setOnInsert: {
+              name: stopName,
+              location: {
+                type: 'Point',
+                coordinates: defaultCoordinates
+              }
             }
-          });
-          await stop.save();
-        }
+          },
+          {
+            new: true,
+            upsert: true,
+            setDefaultsOnInsert: true
+          }
+        );
 
         stopIds.push({
           stopId: stop._id,
@@ -122,24 +131,31 @@ async function seed() {
         });
       }
 
-      const existingRoute = await Route.findOne({ name: data.name });
-      if (existingRoute) { console.log(`Already exists: ${data.name}`); continue; }
+      // Create route or update it if it already exists
+      await Route.findOneAndUpdate(
+        { name: data.name },
+        {
+          $set: {
+            description: `${data.terminals} (${data.length})`,
+            stops: stopIds
+          }
+        },
+        {
+          new: true,
+          upsert: true,
+          runValidators: true
+        }
+      );
 
-      const newRoute = new Route({
-        name: data.name,
-        description: `${data.terminals} (${data.length})`,
-        stops: stopIds
-      });
-
-      await newRoute.save();
-      console.log(`✅ Seeded: ${data.name}`);
+      console.log(`Seeded/Updated: ${data.name}`);
     }
 
-    console.log('🎉 Seeding completed successfully!');
-    process.exit();
-  } catch (err) {
-    console.error('❌ Seeding failed:', err);
-    process.exit(1);
+    console.log('All routes and stops have been saved!');
+  } catch (error) {
+    console.error('Seeding failed:', error);
+  } finally {
+    await mongoose.disconnect();
+    console.log('MongoDB disconnected.');
   }
 }
 

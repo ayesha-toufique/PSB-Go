@@ -30,11 +30,25 @@ const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
 
 app.use(cors({
   origin(origin, callback) {
-    // Requests without Origin include mobile clients and tools such as Postman.
-    if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+    // Allow requests without an Origin header (Postman/mobile)
+    if (!origin) {
       return callback(null, true);
     }
-    return callback(new Error('Not allowed by CORS'));
+
+    // Allow configured origins
+    if (allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    // Allow localhost with any port during development
+    const isLocalhost =
+      /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+
+    if (process.env.NODE_ENV !== 'production' && isLocalhost) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`Not allowed by CORS: ${origin}`));
   },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']

@@ -13,5 +13,5 @@ const routeSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-routeSchema.index({ path: '2dsphere' });
+// routeSchema.index({ path: '2dsphere' });
 module.exports = mongoose.model('Route', routeSchema);
