@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -8,10 +7,12 @@ class AppColors {
   static const Color brandRed = Color(0xFFE3343F);
   static const Color brandCyan = Color(0xFF00C6DD);
 
+  // SPLASH
+  static const Color splashColor = Color(0xFF00090F);
+
   // LIGHT THEME
   static const Color lightBackgroundStart = Color(0xFFE4F7FF);
   static const Color lightBackgroundEnd = Color(0xFFF8FCFF);
-
   static const Color lightSurface = Color(0xFFFFFFFF);
   static const Color lightPrimaryText = Color(0xFF00274F);
   static const Color lightSecondaryText = Color(0xFF003D73);
@@ -21,7 +22,6 @@ class AppColors {
   // DARK THEME
   static const Color darkBackgroundStart = Color(0xFF00101F);
   static const Color darkBackgroundEnd = Color(0xFF00283A);
-
   static const Color darkSurface = Color(0xFF10263F);
   static const Color darkPrimaryText = Color(0xFFF3FAFF);
   static const Color darkSecondaryText = Color(0xFFD9F8FF);
