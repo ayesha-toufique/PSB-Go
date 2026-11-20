@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/auth_service.dart';
 import '../routes/app_routes.dart';
@@ -68,14 +69,25 @@ class AuthController extends GetxController {
       );
 
       final nextStep = result['nextStep'];
+      final user = result['user'];
+
+final prefs = await SharedPreferences.getInstance();
+
+await prefs.setString(
+  'userName',
+  user['name'] ?? 'Passenger',
+);
 
       Get.snackbar('Success', result['message'] ?? 'Login successful');
-
       if (nextStep == 'driver_verification') {
         Get.offAllNamed(AppRoutes.driverVerification);
+      } else if (result['user']['role'] == 'passenger') {
+        Get.offAllNamed(AppRoutes.passengerHome);
       } else {
-        // Temporary destination until the role dashboards are implemented.
-        Get.snackbar('Logged in', 'Your ${result['user']['role']} account is active.');
+        Get.snackbar(
+          'Logged in',
+          'Your ${result['user']['role']} account is active.',
+        );
       }
     } catch (e) {
       Get.snackbar('Login Error', e.toString().replaceFirst('Exception: ', ''));

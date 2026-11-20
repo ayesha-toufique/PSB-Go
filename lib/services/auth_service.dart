@@ -7,8 +7,7 @@ import '../models/user_model.dart';
 class AuthService {
   // Android emulator: 10.0.2.2 points to your computer.
   // For a physical phone, use your computer's local Wi-Fi IP.
-  static const String baseUrl = 'http://10.0.2.2:5005/api';
-
+static const String baseUrl = 'http://localhost:5005/api';
   Future<Map<String, dynamic>> register({
     required String name,
     required String email,

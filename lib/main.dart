@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psb_go/controllers/passenger/favourite_controller.dart';
 import 'package:psb_go/utils/theme/app_theme.dart';
 
 import 'controllers/theme_controller.dart';
@@ -10,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   Get.put(ThemeController(), permanent: true);
-
+  Get.put(FavouriteController(), permanent: true);
   runApp(const PSBGoApp());
 }
 
