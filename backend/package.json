@@ -5,8 +5,8 @@
   "description": "MVC REST API for PSB Go",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node init && node server.js",
+    "dev": "node init && nodemon server.js",
     "seed:routes": "node scripts/seedRoutes.js",
     "create:admin": "node scripts/createAdmin.js"
   },

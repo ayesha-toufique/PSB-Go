@@ -25,14 +25,12 @@ class PSBGoApp extends StatelessWidget {
         return GetMaterialApp(
           title: 'PSB Go',
           debugShowCheckedModeBanner: false,
-
           theme: AppThemes.lightTheme,
           darkTheme: AppThemes.darkTheme,
           themeMode: controller.isDarkMode.value
               ? ThemeMode.dark
               : ThemeMode.light,
-
-          initialRoute: AppRoutes.login,
+          initialRoute: AppRoutes.splash,
           getPages: AppPages.pages,
         );
       },
