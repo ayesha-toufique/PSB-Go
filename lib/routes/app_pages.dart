@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:psb_go/view/passenger/favourite_screen.dart';
 
 import 'app_routes.dart';
+import '../view/splash_screen.dart';
 import '../view/login_screen.dart';
 import '../view/signup_screen.dart';
 import '../view/passenger/passenger_home_screen.dart';
@@ -11,7 +12,12 @@ import '../view/passenger/drop_point_screen.dart';
 import '../view/passenger/live_map_screen.dart';
 
 class AppPages {
+  
   static final pages = [
+    GetPage(name: AppRoutes.splash, 
+    page: () => const SplashScreen()
+    ),
+
     GetPage(
       name: AppRoutes.login,
       page: () => const LoginScreen(),
