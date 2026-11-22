@@ -32,7 +32,7 @@ class PSBGoApp extends StatelessWidget {
               ? ThemeMode.dark
               : ThemeMode.light,
 
-          initialRoute: AppRoutes.login,
+          initialRoute: AppRoutes.splash,
           getPages: AppPages.pages,
         );
       },
