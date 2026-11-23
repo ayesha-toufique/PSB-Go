@@ -11,4 +11,9 @@ class AppRoutes {
   static const dropPoint = '/drop-point';
   static const liveMap = '/live-map';
   static const favourites = '/favourites';
+  static const announcements = '/announcements';
+  static const exploreRoutes = '/explore-routes';
+  static const driverHome = '/driver-home';
+  static const driverBusSelection = '/driver-bus-selection';
+
 }

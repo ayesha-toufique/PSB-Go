@@ -260,19 +260,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
-
                   _actionTile(
-                    icon: Icons.notifications_none_rounded,
-                    title: 'Announcements',
-                    subtitle: 'View service updates',
-                    colors: colors,
-                    onTap: () {
-                      Get.snackbar(
-                        'Announcements',
-                        'We will connect this screen next.',
-                      );
-                    },
-                  ),
+                  icon: Icons.notifications_none_rounded,
+                  title: 'Announcements',
+                  subtitle: 'View service updates',
+                  colors: colors,
+                  onTap: () {
+                    Get.toNamed(AppRoutes.announcements);
+                  },
+                ),
 
                   _actionTile(
                     icon: Icons.favorite_border_rounded,

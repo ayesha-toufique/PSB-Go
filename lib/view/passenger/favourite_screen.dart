@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psb_go/view/passenger/explore_routes_screen.dart';
 
 import '../../constants/app_colors.dart';
 import '../../controllers/passenger/favourite_controller.dart';
@@ -228,7 +229,9 @@ class FavouriteScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton.icon(
-              onPressed: () => Get.back(),
+              onPressed: () => Get.offNamed(
+                AppRoutes.exploreRoutes,
+              ),
               icon: const Icon(Icons.explore_outlined),
               label: const Text('Explore Routes'),
               style: ElevatedButton.styleFrom(

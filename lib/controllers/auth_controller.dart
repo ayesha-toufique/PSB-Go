@@ -80,15 +80,17 @@ await prefs.setString(
 
       Get.snackbar('Success', result['message'] ?? 'Login successful');
       if (nextStep == 'driver_verification') {
-        Get.offAllNamed(AppRoutes.driverVerification);
-      } else if (result['user']['role'] == 'passenger') {
-        Get.offAllNamed(AppRoutes.passengerHome);
-      } else {
-        Get.snackbar(
-          'Logged in',
-          'Your ${result['user']['role']} account is active.',
-        );
-      }
+  Get.offAllNamed(AppRoutes.driverVerification);
+} else if (nextStep == 'driver_dashboard') {
+  Get.offAllNamed(AppRoutes.driverHome);
+} else if (nextStep == 'passenger_home') {
+  Get.offAllNamed(AppRoutes.passengerHome);
+} else {
+  Get.snackbar(
+    'Login Error',
+    'Unable to identify your account role.',
+  );
+}
     } catch (e) {
       Get.snackbar('Login Error', e.toString().replaceFirst('Exception: ', ''));
     } finally {
