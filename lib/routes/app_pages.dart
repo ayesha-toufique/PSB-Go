@@ -1,5 +1,9 @@
 
 import 'package:get/get.dart';
+import 'package:psb_go/view/driver/bus_selection_screen.dart';
+import 'package:psb_go/view/driver/driver_home_screen.dart';
+import 'package:psb_go/view/passenger/announcements_screen.dart';
+import 'package:psb_go/view/passenger/explore_routes_screen.dart';
 import 'package:psb_go/view/passenger/favourite_screen.dart';
 
 import 'app_routes.dart';
@@ -45,6 +49,23 @@ class AppPages {
     GetPage(
   name: AppRoutes.favourites,
   page: () => const FavouriteScreen(),
+),
+GetPage(
+  name: AppRoutes.announcements,
+  page: () => const AnnouncementsScreen(),
+),
+GetPage(
+  name: AppRoutes.exploreRoutes,
+  page: () => const ExploreRoutesScreen(),
+),
+GetPage(
+  name: AppRoutes.driverHome,
+  page: () => const DriverHomeScreen(),
+),
+
+GetPage(
+  name: AppRoutes.driverBusSelection,
+  page: () => const BusSelectionScreen(),
 ),
   ];
 }

@@ -4,7 +4,7 @@ const driverDetailsSchema = new mongoose.Schema({
   cnic: {
     type: String,
     trim: true,
-    match: [/^\\d{5}-?\\d{7}-?\\d{1}$/, 'Enter a valid 13-digit CNIC']
+    match: [/^\d{5}-?\d{7}-?\d{1}$/, 'Enter a valid 13-digit CNIC']
   },
   licenseNo: { type: String, trim: true },
   verificationStatus: {

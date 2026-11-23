@@ -173,47 +173,41 @@ class _ExploreRoutesScreenState extends State<ExploreRoutesScreen> {
     );
   }
 
-  Widget _buildHeader(
-    BuildContext context,
-    ColorScheme colors,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 8, 18, 8),
-      child: Row(
-        children: [
-          IconButton(
-            onPressed: () => Get.back(),
-            icon: Icon(
-              Icons.arrow_back_ios_new_rounded,
+
+Widget _buildHeader(
+  BuildContext context,
+  ColorScheme colors,
+) {
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(20, 8, 18, 8),
+    child: Row(
+      children: [
+        Expanded(
+          child: Text(
+            'Explore Routes',
+            style: TextStyle(
               color: colors.onSurface,
-              size: 20,
+              fontSize: 19,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          Expanded(
-            child: Text(
-              'Explore Routes',
-              style: TextStyle(
-                color: colors.onSurface,
-                fontSize: 19,
-                fontWeight: FontWeight.bold,
-              ),
+        ),
+        Obx(
+          () => IconButton(
+            onPressed: themeController.toggleTheme,
+            icon: Icon(
+              themeController.isDarkMode.value
+                  ? Icons.light_mode_rounded
+                  : Icons.dark_mode_rounded,
+              color: colors.onSurface,
             ),
           ),
-          Obx(
-            () => IconButton(
-              onPressed: themeController.toggleTheme,
-              icon: Icon(
-                themeController.isDarkMode.value
-                    ? Icons.light_mode_rounded
-                    : Icons.dark_mode_rounded,
-                color: colors.onSurface,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
+
 
   Widget _buildSearchField(
     BuildContext context,
