@@ -74,191 +74,171 @@ class _LoginScreenState extends State<LoginScreen> {
           child: LayoutBuilder(
             builder: (context, constraints) {
               return SingleChildScrollView(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: constraints.maxHeight,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 20,
                   ),
-
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 25,
-                      vertical: 20,
-                    ),
-
-                    child: Form(
-                      key: formKey,
-
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-
-                          // BACK BUTTON AND THEME TOGGLE
-                          Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                            children: [
-
-                              IconButton(
+                
+                  child: Form(
+                    key: formKey,
+                
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                
+                        // BACK BUTTON AND THEME TOGGLE
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment.end,
+                          children: [
+                
+                            Obx(
+                              () => IconButton(
                                 onPressed: () {
-                                  if (Get.key.currentState?.canPop() ??
-                                      false) {
-                                    Get.back();
-                                  }
+                                  themeController.toggleTheme();
                                 },
                                 icon: Icon(
-                                  Icons.arrow_back,
+                                  themeController.isDarkMode.value
+                                      ? Icons.light_mode
+                                      : Icons.dark_mode,
                                   color: colors.onSurface,
-                                  size: 26,
-                                ),
-                              ),
-
-                              Obx(
-                                () => IconButton(
-                                  onPressed: () {
-                                    themeController.toggleTheme();
-                                  },
-                                  icon: Icon(
-                                    themeController.isDarkMode.value
-                                        ? Icons.light_mode
-                                        : Icons.dark_mode,
-                                    color: colors.onSurface,
-                                    size: 25,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          const SizedBox(height: 25),
-
-                          // APP LOGO
-                          SvgPicture.asset(
-                            AppAssets.logo,
-                            width: 150,
-                            height: 130,
-                            fit: BoxFit.contain,
-                          ),
-
-                          const SizedBox(height: 3),
-
-                          // APP TAGLINE
-                          Text(
-                            'Track • Ride • Explore',
-                            style: TextStyle(
-                              color: isDark
-                                  ? AppColors.darkPrimaryText
-                                  : const Color(0xFF00274F),
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-
-                          const SizedBox(height: 65),
-
-                          // EMAIL FIELD
-                          CustomTextField(
-                            hint: 'Email Address',
-                            icon: Icons.email_outlined,
-                            controller: emailController,
-                            validator: Validators.email,
-                            keyboardType: TextInputType.emailAddress,
-                          ),
-
-                          const SizedBox(height: 18),
-
-                          // PASSWORD FIELD
-                          Obx(
-                            () => CustomTextField(
-                              hint: 'Password',
-                              icon: Icons.lock_outline,
-                              controller: passwordController,
-                              validator: Validators.password,
-                              obscureText:
-                                  !auth.isPasswordVisible.value,
-
-                              suffixIcon: IconButton(
-                                onPressed: auth.togglePassword,
-                                icon: Icon(
-                                  auth.isPasswordVisible.value
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: colors.onSurface,
+                                  size: 25,
                                 ),
                               ),
                             ),
+                          ],
+                        ),
+                
+                        const SizedBox(height: 25),
+                
+                        // APP LOGO
+                        SvgPicture.asset(
+                          AppAssets.logo,
+                          width: 150,
+                          height: 130,
+                          fit: BoxFit.contain,
+                        ),
+                
+                        const SizedBox(height: 3),
+                
+                        // APP TAGLINE
+                        Text(
+                          'Track • Ride • Explore',
+                          style: TextStyle(
+                            color: isDark
+                                ? AppColors.darkPrimaryText
+                                : const Color(0xFF00274F),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
                           ),
-
-                          const SizedBox(height: 25),
-
-                          // LOGIN BUTTON
-                          Obx(
-                            () => CustomButton(
-                              title: 'Login',
-                              isLoading: auth.isLoading.value,
-
-                              onPressed: () {
-                                if (formKey.currentState!.validate()) {
-                                  auth.login(
-                                    email: emailController.text.trim(),
-                                    password: passwordController.text,
-                                  );
-                                }
-                              },
+                        ),
+                
+                        const SizedBox(height: 65),
+                
+                        // EMAIL FIELD
+                        CustomTextField(
+                          hint: 'Email Address',
+                          icon: Icons.email_outlined,
+                          controller: emailController,
+                          validator: Validators.email,
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                
+                        const SizedBox(height: 18),
+                
+                        // PASSWORD FIELD
+                        Obx(
+                          () => CustomTextField(
+                            hint: 'Password',
+                            icon: Icons.lock_outline,
+                            controller: passwordController,
+                            validator: Validators.password,
+                            obscureText:
+                                !auth.isPasswordVisible.value,
+                
+                            suffixIcon: IconButton(
+                              onPressed: auth.togglePassword,
+                              icon: Icon(
+                                auth.isPasswordVisible.value
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: colors.onSurface,
+                              ),
                             ),
                           ),
-
-                          // FORGOT PASSWORD
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () {
-                                Get.toNamed(
-                                  AppRoutes.forgotPassword,
+                        ),
+                
+                        const SizedBox(height: 25),
+                
+                        // LOGIN BUTTON
+                        Obx(
+                          () => CustomButton(
+                            title: 'Login',
+                            isLoading: auth.isLoading.value,
+                
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                auth.login(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text,
                                 );
-                              },
-
-                              child: Text(
-                                'Forgot Password?',
-                                style: TextStyle(
-                                  color: colors.onSurface,
-                                  fontSize: 12,
-                                ),
+                              }
+                            },
+                          ),
+                        ),
+                
+                        // FORGOT PASSWORD
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () {
+                              Get.toNamed(
+                                AppRoutes.forgotPassword,
+                              );
+                            },
+                
+                            child: Text(
+                              'Forgot Password?',
+                              style: TextStyle(
+                                color: colors.onSurface,
+                                fontSize: 12,
                               ),
                             ),
                           ),
-
-                          const SizedBox(height: 35),
-
-                          // SIGNUP NAVIGATION
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-
-                              Text(
-                                "Don't have an account? ",
+                        ),
+                
+                        const SizedBox(height: 35),
+                
+                        // SIGNUP NAVIGATION
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                
+                            Text(
+                              "Don't have an account? ",
+                              style: TextStyle(
+                                color: colors.onSurface,
+                                fontSize: 13,
+                              ),
+                            ),
+                
+                            TextButton(
+                              onPressed: () {
+                                Get.toNamed(AppRoutes.signup);
+                              },
+                
+                              child: Text(
+                                'Sign Up',
                                 style: TextStyle(
-                                  color: colors.onSurface,
-                                  fontSize: 13,
+                                  color: colors.secondary,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-
-                              TextButton(
-                                onPressed: () {
-                                  Get.toNamed(AppRoutes.signup);
-                                },
-
-                                child: Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                    color: colors.secondary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
