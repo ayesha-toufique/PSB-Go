@@ -15,5 +15,5 @@ class AppRoutes {
   static const exploreRoutes = '/explore-routes';
   static const driverHome = '/driver-home';
   static const driverBusSelection = '/driver-bus-selection';
-
+  static const driverLiveTracking = '/driver-live-tracking';
 }

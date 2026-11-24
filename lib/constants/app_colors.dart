@@ -36,7 +36,7 @@ class AppColors {
   static const Color success = Color(0xFF00B982);
   static const Color warning = Color(0xFFFFB547);
   static const Color disabled = Color(0xFF98A2B3);
-
+  static const Color  onSurface= Color(0xFF00274F);
   // splash color
   static const Color splashColor = Color(0xFF00090F);
 }
