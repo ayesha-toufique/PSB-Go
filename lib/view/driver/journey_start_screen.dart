@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class JourneyStartedScreen extends StatefulWidget {
   final String routeCode;
@@ -24,19 +25,16 @@ class _JourneyStartedScreenState
   static const Color primaryColor = Color(0xFF00B995);
   static const Color backgroundColor = Color(0xFFEAF8FC);
 
-  bool isJourneyStarted = false;
+  final isJourneyStarted = false.obs;
 
   void startJourney() {
-    setState(() {
-      isJourneyStarted = true;
-    });
+  isJourneyStarted.value = true;
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Your journey has started successfully!'),
-      ),
-    );
-  }
+  Get.snackbar(
+    'Success',
+    'Your journey has started successfully',
+  );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +55,7 @@ class _JourneyStartedScreenState
                 ),
                 child: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Get.back();
                   },
                   icon: const Icon(
                     Icons.arrow_back,
@@ -70,7 +68,6 @@ class _JourneyStartedScreenState
 
             const SizedBox(height: 28),
 
-            // Success Icon
             Container(
               height: 66,
               width: 66,
@@ -87,7 +84,6 @@ class _JourneyStartedScreenState
 
             const SizedBox(height: 23),
 
-            // Main Heading
             const Text(
               'Journey Started!',
               textAlign: TextAlign.center,
@@ -100,7 +96,6 @@ class _JourneyStartedScreenState
 
             const SizedBox(height: 15),
 
-            // Selected Route
             Text(
               'Route ${widget.routeCode}',
               style: const TextStyle(
@@ -112,7 +107,6 @@ class _JourneyStartedScreenState
 
             const SizedBox(height: 5),
 
-            // Starting and Ending Location
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
@@ -130,7 +124,6 @@ class _JourneyStartedScreenState
 
             const Spacer(),
 
-            // Same Green Bus Image as Home Screen
             Container(
               width: double.infinity,
               height: 150,
@@ -143,7 +136,7 @@ class _JourneyStartedScreenState
               ),
               clipBehavior: Clip.antiAlias,
               child: Image.asset(
-                'assets/images/psb_bus.png',
+                'assets/images/psb_bus_crop.png',
                 fit: BoxFit.contain,
                 errorBuilder: (context, error, stackTrace) {
                   return const Center(
@@ -167,34 +160,27 @@ class _JourneyStartedScreenState
               child: SizedBox(
                 width: double.infinity,
                 height: 52,
-                child: ElevatedButton(
-                  onPressed: isJourneyStarted
-                      ? null
-                      : startJourney,
-
+                child: 
+                Obx(() => ElevatedButton(
+                  onPressed: isJourneyStarted.value ? null : startJourney,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primaryColor,
                     disabledBackgroundColor: primaryColor,
                     foregroundColor: Colors.white,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35),
-                    ),
-                  ),
-
-                  child: Text(
-                    isJourneyStarted
-                        ? 'Journey Started'
-                        : 'Start Journey',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                      borderRadius: BorderRadius.circular(35),),),
+                      child: Text(
+                        isJourneyStarted.value? 'Journey Started' : 'Start Journey',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          ),
+                          ),
+                          ),
+                          )
               ),
             ),
-
             const SizedBox(height: 45),
           ],
         ),

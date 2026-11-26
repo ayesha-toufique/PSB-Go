@@ -5,7 +5,7 @@ import 'package:psb_go/view/driver/driver_home_screen.dart';
 import 'package:psb_go/view/passenger/announcements_screen.dart';
 import 'package:psb_go/view/passenger/explore_routes_screen.dart';
 import 'package:psb_go/view/passenger/favourite_screen.dart';
-
+import '../view/driver/live _tracking_screen.dart';
 import 'app_routes.dart';
 import '../view/splash_screen.dart';
 import '../view/login_screen.dart';
@@ -60,12 +60,17 @@ GetPage(
 ),
 GetPage(
   name: AppRoutes.driverHome,
-  page: () => const DriverHomeScreen(),
+  page: () => DriverHomeScreen(),
 ),
 
 GetPage(
   name: AppRoutes.driverBusSelection,
-  page: () => const BusSelectionScreen(),
+  page: () => BusSelectionScreen(),
+),
+
+GetPage(
+  name: AppRoutes.LiveTracking,
+  page: () => LiveTrackingScreen(),
 ),
   ];
 }

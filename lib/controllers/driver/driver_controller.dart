@@ -1,5 +1,5 @@
-
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/bus_model.dart';
 import '../../models/route_model.dart';
 import '../../services/driver_service.dart';
@@ -18,6 +18,7 @@ class DriverController extends GetxController {
   final isLoading = false.obs;
   final isStartingJourney = false.obs;
   final isEndingJourney = false.obs;
+  final driverName = 'Driver'.obs;
 
   final errorMessage = ''.obs;
 
@@ -25,7 +26,16 @@ class DriverController extends GetxController {
   void onInit() {
     super.onInit();
     loadDriverData();
+    loadDriverName();
   }
+
+  Future<void> loadDriverName() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  final savedName = prefs.getString('userName');
+
+  driverName.value = savedName ?? 'Driver';
+}
 
   Future<void> loadDriverData() async {
     try {

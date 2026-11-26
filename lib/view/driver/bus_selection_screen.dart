@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,15 +5,11 @@ import '../../constants/app_colors.dart';
 import '../../controllers/driver/driver_controller.dart';
 import '../../models/bus_model.dart';
 
-class BusSelectionScreen extends StatelessWidget {
-  const BusSelectionScreen({super.key});
+class BusSelectionScreen extends StatelessWidget { BusSelectionScreen({super.key});
 
+  final DriverController controller = Get.find<DriverController>();
   @override
   Widget build(BuildContext context) {
-    final controller = Get.isRegistered<DriverController>()
-        ? Get.find<DriverController>()
-        : Get.put(DriverController());
-
     return Scaffold(
       backgroundColor: const Color(0xFFEAF8FC),
       appBar: AppBar(

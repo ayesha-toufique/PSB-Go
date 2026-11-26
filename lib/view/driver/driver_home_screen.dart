@@ -1,37 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
+
 import '../../routes/app_routes.dart';
 import '../../constants/app_colors.dart';
+import 'package:psb_go/controllers/driver/driver_controller.dart';
 
-class DriverHomeScreen extends StatefulWidget {
-  const DriverHomeScreen({super.key});
+class DriverHomeScreen extends StatelessWidget {
+  DriverHomeScreen({super.key});
 
-  @override
-  State<DriverHomeScreen> createState() => _DriverHomeScreenState();
-}
-
-class _DriverHomeScreenState extends State<DriverHomeScreen> {
-  String driverName = 'Driver';
-
-  @override
-  void initState() {
-    super.initState();
-    loadDriverName();
-  }
-
-  // Get driver name saved during login
-  Future<void> loadDriverName() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    final savedName = prefs.getString('userName');
-
-    if (!mounted) return;
-
-    setState(() {
-      driverName = savedName ?? 'Driver';
-    });
-  }
+  final DriverController controller = Get.find<DriverController>();
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +25,6 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
-              // Header
               Row(
                 children: [
                   IconButton(
@@ -87,19 +62,20 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
 
               const SizedBox(height: 28),
 
-              // Dynamic Driver Name
-              Text(
-                'Hello, $driverName 👋',
-                style: const TextStyle(
-                  fontSize: 29,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.lightPrimaryText,
+              // Driver name using GetX
+              Obx(
+                () => Text(
+                  'Hello, 👋',
+                  style: const TextStyle(
+                    fontSize: 29,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.lightPrimaryText,
+                  ),
                 ),
               ),
 
               const SizedBox(height: 25),
 
-              // Bus Illustration
               SizedBox(
                 width: double.infinity,
                 height: 270,
@@ -121,7 +97,6 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
 
               const SizedBox(height: 25),
 
-              // Main Heading
               const Center(
                 child: Text(
                   'Your Journey Starts Here!',
@@ -136,7 +111,6 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
 
               const SizedBox(height: 12),
 
-              // Description
               const Text(
                 'Select your assigned bus to view your '
                 'route and duty details.',
@@ -150,7 +124,6 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
 
               const SizedBox(height: 32),
 
-              // Information Card
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
@@ -215,7 +188,6 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
 
               const SizedBox(height: 35),
 
-              // Select Your Bus Button
               SizedBox(
                 width: double.infinity,
                 height: 72,

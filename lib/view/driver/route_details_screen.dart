@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RouteDetailsScreen extends StatelessWidget {
   final String routeCode;
@@ -175,13 +176,7 @@ class RouteDetailsScreen extends StatelessWidget {
                 height: 55,
                 child: ElevatedButton(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          'Live tracking will be connected later.',
-                        ),
-                      ),
-                    );
+                    Get.snackbar('Now', 'live tracking will be connected here',);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primaryColor,
@@ -210,20 +205,9 @@ class RouteDetailsScreen extends StatelessWidget {
                 child: OutlinedButton(
                   onPressed: () {
                     if (nextScreenBuilder != null) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: nextScreenBuilder!,
-                        ),
-                      );
+                      Get.to(() => nextScreenBuilder!);
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'Next screen will be connected.',
-                          ),
-                        ),
-                      );
+                      Get.snackbar('Now', 'Next screen will be connected',);
                     }
                   },
                   style: OutlinedButton.styleFrom(
@@ -274,7 +258,7 @@ class RouteDetailsScreen extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Get.back();
                     },
                     icon: const Icon(
                       Icons.arrow_back,
