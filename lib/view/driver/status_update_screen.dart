@@ -45,39 +45,39 @@ class _StatusUpdateScreenState extends State<StatusUpdateScreen> {
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: [
-              // Header
-              SizedBox(
-                height: 65,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: IconButton(
-                        onPressed: () => Get.back(),
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: colors.onSurface,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Header
+                SizedBox(
+                  height: 65,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: IconButton(
+                          onPressed: () => Get.back(),
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: colors.onSurface,
+                          ),
                         ),
                       ),
-                    ),
-                    Text(
-                      'Status Update',
-                      style: TextStyle(
-                        color: colors.onSurface,
-                        fontSize: 23,
-                        fontWeight: FontWeight.bold,
+                      Text(
+                        'Status Update',
+                        style: TextStyle(
+                          color: colors.onSurface,
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-
-              // Status options
-              Expanded(
-                child: Padding(
+                  
+                // Status options
+                Padding(
                   padding: const EdgeInsets.all(24),
                   child: Column(
                     children: [
@@ -88,7 +88,7 @@ class _StatusUpdateScreenState extends State<StatusUpdateScreen> {
                       'Other',
                     ].map((status) {
                       bool isSelected = selectedStatus == status;
-
+                
                       return GestureDetector(
                         onTap: () {
                           setState(() {
@@ -134,40 +134,40 @@ class _StatusUpdateScreenState extends State<StatusUpdateScreen> {
                     }).toList(),
                   ),
                 ),
-              ),
-
-              // Update button
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 10, 24, 24),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 54,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Get.snackbar(
-                        'Status Updated',
-                        'Your status is $selectedStatus',
-                        snackPosition: SnackPosition.BOTTOM,
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.brandTeal,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                  
+                // Update button
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 10, 24, 24),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 54,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Get.snackbar(
+                          'Status Updated',
+                          'Your status is $selectedStatus',
+                          snackPosition: SnackPosition.BOTTOM,
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.brandTeal,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      'Update Status',
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
+                      child: const Text(
+                        'Update Status',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -2,6 +2,7 @@
 import 'package:get/get.dart';
 import 'package:psb_go/view/driver/bus_selection_screen.dart';
 import 'package:psb_go/view/driver/driver_home_screen.dart';
+import 'package:psb_go/view/driver/status_update_screen.dart';
 import 'package:psb_go/view/passenger/announcements_screen.dart';
 import 'package:psb_go/view/passenger/explore_routes_screen.dart';
 import 'package:psb_go/view/passenger/favourite_screen.dart';
@@ -71,6 +72,11 @@ GetPage(
 GetPage(
   name: AppRoutes.LiveTracking,
   page: () => LiveTrackingScreen(),
+),
+
+GetPage(
+  name: AppRoutes.StatusUpdate,
+  page: () => StatusUpdateScreen(),
 ),
   ];
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:psb_go/routes/app_routes.dart';
 class RouteDetailsScreen extends StatelessWidget {
   final String routeCode;
 
@@ -176,7 +176,7 @@ class RouteDetailsScreen extends StatelessWidget {
                 height: 55,
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.snackbar('Now', 'live tracking will be connected here',);
+                     Get.toNamed(AppRoutes.LiveTracking);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primaryColor,

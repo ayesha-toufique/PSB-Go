@@ -1,8 +1,10 @@
-
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-
+import 'package:psb_go/constants/app_colors.dart';
+import 'package:psb_go/routes/app_pages.dart';
+import 'package:psb_go/routes/app_routes.dart';
 class LiveTrackingScreen extends StatefulWidget {
   const LiveTrackingScreen({super.key});
 
@@ -64,6 +66,8 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
                       size: 27,
                     ),
                   ),
+
+                 
                 ],
               ),
             ),
@@ -211,7 +215,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
                   Positioned(
                     left: 16,
                     right: 16,
-                    bottom: 20,
+                    bottom: 29,
                     child: Container(
                       padding: const EdgeInsets.all(18),
                       decoration: BoxDecoration(
@@ -301,6 +305,35 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
                       ),
                     ),
                   ),
+                  Positioned(
+  left: 10,
+  right: 10,
+  bottom: 10,
+  child: SizedBox(
+    width: double.infinity,
+    height: 35,
+    child: ElevatedButton(
+      onPressed: () {
+        Get.toNamed(AppRoutes.StatusUpdate);
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.brandTeal,
+        foregroundColor: AppColors.white,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+      ),
+      child: const Text(
+        'Status Update',
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  ),
+),
                 ],
               ),
             ),
