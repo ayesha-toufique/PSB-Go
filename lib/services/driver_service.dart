@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -50,9 +49,11 @@ class DriverService {
     final List buses = data['buses'] ?? [];
 
     return buses
-        .map((item) => BusModel.fromJson(
-              Map<String, dynamic>.from(item),
-            ))
+        .map(
+          (item) => BusModel.fromJson(
+            Map<String, dynamic>.from(item),
+          ),
+        )
         .toList();
   }
 
@@ -67,9 +68,11 @@ class DriverService {
     final List routes = data['routes'] ?? [];
 
     return routes
-        .map((item) => RouteModel.fromJson(
-              Map<String, dynamic>.from(item),
-            ))
+        .map(
+          (item) => RouteModel.fromJson(
+            Map<String, dynamic>.from(item),
+          ),
+        )
         .toList();
   }
 

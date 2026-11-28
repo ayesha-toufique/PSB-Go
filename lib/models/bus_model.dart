@@ -1,4 +1,3 @@
-
 class BusModel {
   final String id;
   final String registrationNumber;
