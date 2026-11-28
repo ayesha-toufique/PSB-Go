@@ -6,10 +6,9 @@ import 'package:psb_go/constants/app_strings.dart';
 import 'package:psb_go/controllers/passenger/favourite_controller.dart';
 import 'package:psb_go/routes/app_routes.dart';
 import 'package:psb_go/utils/theme/app_theme.dart';
-
-import 'controllers/theme_controller.dart';
-import 'routes/app_pages.dart';
-import 'routes/app_routes.dart';
+import 'package:psb_go/controllers/theme_controller.dart';
+import 'package:psb_go/routes/app_pages.dart';
+import 'package:psb_go/routes/app_routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
